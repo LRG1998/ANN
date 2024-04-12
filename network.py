@@ -2,13 +2,18 @@ from Node import Node
 import random
 from array import *
 
+''' Spongegar ANN
+    Doesn't handle zeroes as of 4/12/2024
+    Copyright Jordan Veldkamp'''
+
+
 #Only value you can change
-learningRate = 0.001
+learningRate = 0.01
 numberInput = 1
 numberOutput = numberInput * 2
 confidence = 0.05
 netwidth = 3
-epoch = 2000
+epoch = 4000
 
 
 #Constructing node network
