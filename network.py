@@ -4,13 +4,16 @@ from array import *
 
 #Only value you can change
 learningRate = 0.001
-numberInput = 10
+numberInput = 1
 numberOutput = numberInput * 2
+confidence = 0.05
+netwidth = 3
+epoch = 2000
 
 
 #Constructing node network
 
-netwidth, netheight = (4,2)
+netheight = (2)
 
 network = [[0 for x in range(netwidth)]for y in range(netheight)]
 for x in range(netheight):
@@ -37,9 +40,9 @@ def difference():
     return diff
 
 def findDelta():
-    deltas = [5]*5
+    deltas = [5]*(netwidth + 1)
     deltas[0] = -difference()
-    for i in range(1,5):
+    for i in range(1,netwidth + 1):
         deltas[i] = deltas[0] * secondLayer[i-1].weight
     return deltas
 
@@ -52,10 +55,18 @@ def updateNodes():
             network[x][y].updateWeight(learningRate,numberInput,findDelta()[y+1])
 
 def run():
-    while abs(difference()) > 0.05:
+    iteration = 0
+    while abs(difference()) > confidence:
         if abs(difference()) >= float('inf'):
             break
         updateNodes()
         print(result())
+        iteration += 1
+        if iteration > epoch:
+            print("Can't find solution.")
+            break
+    for x in range(netwidth):
+        for y in range(netheight):
+            print("Node" + str(x) + str(y) + ": " + str(network[y][x].weight))
 
 run()
