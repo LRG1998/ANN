@@ -1,6 +1,6 @@
 import random
 class Node:
-
+#Initialized code
     def __init__(self):
         self.weight = random.uniform(-1.0,1.0)
         
